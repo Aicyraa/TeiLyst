@@ -1,4 +1,4 @@
-@import url("header.css");
+@import url("modal.style.css");
 @import url("helper.style.css");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
@@ -44,19 +44,68 @@ body {
 }
 
 /* 
+ 
+ - Header 
+
+*/
+
+.main__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 40px;
+   padding: 6px 12px;
+   border-radius: 8px 8px 0 0;
+   background-color: var(--header);
+}
+
+#main__header__txt {
+   letter-spacing: 3px;
+}
+
+#main__header__button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 3px;
+   padding: 3px 8px;
+
+   border-radius: 6px;
+   border: none;
+   background-color: var(--bg-accent);
+   box-shadow: 0 0 1px var(--bg-border);
+   transition: padding 0.1s ease-in;
+
+   cursor: pointer;
+}
+
+#main__header__button:hover {
+   padding: 3px 1rem;
+}
+
+#main__header__button img {
+   height: 1rem;
+   /* width: 12px; */
+}
+
+#main__header__button span {
+   letter-spacing: 3px;
+}
+
+/* 
 
  - TODO 
 
 */
 
-.todo__container {
+.main__todo__container {
    padding: 8px 1rem;
    padding: 8px 1;
    height: calc(100% - 40px);
    overflow: auto;
 }
 
-.todo__container::-webkit-scrollbar {
+.main__todo__container::-webkit-scrollbar {
    display: none;
 }
 
@@ -96,59 +145,4 @@ body {
 .todo__info__right:nth-child(2) {
    letter-spacing: 3px;
    font-size: 0.7rem;
-}
-
-/* 
-
- - TODO edit
-
-*/
-
-.todo__edit {
-   display: none ;
-}
-
-.todo__edit.active {
-   position: absolute;
-   width: 400px;
-   height: 330px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   background-color: var(--bg-light);
-
-   display: flex !important;
-   flex-direction: column;
-   gap: 12px;
-
-   z-index: 2;
-}
-
-.todo__edit > textarea {
-   padding: 6px 10px;
-   font-size: 14px;
-   border-radius: 6px;
-   margin: 0 12px;
-   border: 1px solid var(--bg-accent);
-}
-
-.todo__edit > input[type="datetime-local"] {
-   padding: 6px;
-   letter-spacing: 5px;
-   border-radius: 6px;
-   margin: 0 12px;
-   border: 1px solid var(--bg-accent);
-}
-
-.todo__edit > button {
-   padding: 8px;
-   margin: 0 12px 8px 12px;
-   border: 1px solid var(--bg-accent);
-   border-radius: 8px;
-   background-color: var(--bg-accent);
-}
-
-.todo__edit input[type="datetime-local"]:focus,
-.todo__edit textarea:focus {
-   outline: 1px solid var(--bg-accent) !important;
 }

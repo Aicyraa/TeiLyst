@@ -1,0 +1,175 @@
+/*  
+
+ - Error Modal
+ 
+*/
+
+.error__modal {
+   display: none;
+}
+
+.error__modal.active{
+   box-sizing: border-box;
+   position: absolute;
+   top: 2rem;
+   width: 350px;
+   height: 120px;
+   display: flex !important;
+   flex-direction: column;
+   justify-content: center;
+   gap: 1rem;
+   padding: 10px 12px;  
+   border-left: 12px solid hsl(0, 100%, 80%);
+   border-radius: 8px;
+   background-color: var(--bg-light);
+
+   z-index: 2;
+}
+
+.error__modal div {
+   flex-grow: 1;
+   font-size: 12px;
+}
+
+#error__close {
+   padding: 5px 9px;
+   border-radius: 8px;
+   border: none;
+   box-shadow: 0 0 3px var(--bg-shadow);
+   background-color: hsl(80, 50%, 59%);
+}
+
+
+/* 
+
+ - Edit Modal
+
+*/
+
+.edit__modal {
+   display: none;
+}
+
+.edit__modal.active {
+   position: absolute;
+   width: 400px;
+   height: 330px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--bg-light);
+
+   display: flex !important;
+   flex-direction: column;
+   gap: 12px;
+
+   z-index: 2;
+}
+
+.edit__modal__header {
+   background-color: var(--header);
+   border: 8px 8px 0 0;
+   padding: 8px;
+}
+
+.edit__modal > textarea {
+   padding: 6px 10px;
+   font-size: 14px;
+   border-radius: 6px;
+   margin: 0 12px;
+   border: 1px solid var(--bg-accent);
+}
+
+.edit__modal > input[type="datetime-local"] {
+   padding: 6px;
+   letter-spacing: 5px;
+   border-radius: 6px;
+   margin: 0 12px;
+   border: 1px solid var(--bg-accent);
+}
+
+.edit__modal > button {
+   padding: 8px;
+   margin: 0 12px 8px 12px;
+   border: 1px solid var(--bg-accent);
+   border-radius: 8px;
+   background-color: var(--bg-accent);
+}
+
+.edit__modal input[type="datetime-local"]:focus,
+.edit__modal textarea:focus {
+   outline: 1px solid var(--bg-accent) !important;
+}
+
+/* 
+
+ - Add Task Modal
+
+*/
+
+.main__header__add {
+   display: none;
+}
+
+.main__header__add.active {
+   position: absolute;
+   width: 400px;
+   height: 330px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--bg-light);
+
+   display: flex !important;
+   flex-direction: column;
+   gap: 12px;
+
+   z-index: 2;
+}
+
+.main__header__add__top {
+   background-color: var(--header);
+   border: 8px 8px 0 0;
+   padding: 8px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.main__header__add__top img {
+   cursor: pointer;
+}
+
+.main__header__add > textarea {
+   padding: 6px 10px;
+   font-size: 14px;
+   border-radius: 6px;
+   margin: 0 12px;
+   border: 1px solid var(--bg-accent);
+}
+
+.main__header__add > input[type="datetime-local"] {
+   padding: 6px;
+   letter-spacing: 5px;
+   border-radius: 6px;
+   margin: 0 12px;
+   border: 1px solid var(--bg-accent);
+}
+
+.main__header__add > button {
+   padding: 8px;
+   margin: 0 12px 8px 12px;
+   border: 1px solid var(--bg-accent);
+   border-radius: 8px;
+   background-color: var(--bg-accent);
+}
+
+.main__header__add input[type="datetime-local"]:focus,
+.main__header__add textarea:focus {
+   outline: 1px solid var(--bg-accent) !important;
+}
+
+/* TASK HEADER */
+
+
+

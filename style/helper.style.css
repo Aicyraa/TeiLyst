@@ -1,8 +1,8 @@
-.overlay {
+.overlay__screen {
    display: none ;
 }
 
-.overlay.active {
+.overlay__screen.active {
    display: block !important;
    position: absolute;
    height: 100%;
@@ -11,42 +11,6 @@
    z-index: 1;
 }
 
-/* Error Modal */
-
-.error__modal {
-   display: none;
-}
-
-.error__modal.active{
-   box-sizing: border-box;
-   position: absolute;
-   top: 2rem;
-   width: 350px;
-   height: 120px;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   gap: 1rem;
-   padding: 10px 12px;  
-   border-left: 12px solid hsl(0, 100%, 80%);
-   border-radius: 8px;
-   background-color: var(--bg-light);
-
-   z-index: 2;
-}
-
-.error__modal div {
-   flex-grow: 1;
-   font-size: 12px;
-}
-
-#error__close {
-   padding: 5px 9px;
-   border-radius: 8px;
-   border: none;
-   box-shadow: 0 0 3px var(--bg-shadow);
-   background-color: hsl(80, 50%, 59%);
-}
 
 /* DONE */
 
