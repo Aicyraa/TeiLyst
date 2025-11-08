@@ -11,6 +11,7 @@ let modalManager = {
    errModal: document.querySelector(".error__modal"),
 
    editModalCloseBtn: document.getElementById("edit__modal__button__close"),
+   editModalSavebtn: document.getElementById("edit__modal__submit"),
    editModal: document.querySelector(".edit__modal"),
 
 };
