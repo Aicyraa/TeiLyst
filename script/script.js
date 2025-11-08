@@ -1,5 +1,5 @@
 import Task from "./task.class.js";
-import { setID as id, clearInputs as remove, renderTask as render } from "./task.helpers.js";
+import { setID as id, clearInputs as clear, renderTask as render, processDate} from "./task.helpers.js";
 import modalManager, {
    openModal as open,
    closeModal as close,
@@ -23,15 +23,37 @@ modalManager.saveBtn.addEventListener("click", (e) => {
       return err("Invalid Input!");
    }
 
-   let [due] = deadline.value.split("T")
+   let [date, time] = processDate(deadline)
 
    let storage = JSON.parse(localStorage.getItem("storage")) || [];
-   storage.push(new Task(id(), task.value, due));
+   storage.push(new Task(id(), task.value, date));
    localStorage.setItem("storage", JSON.stringify(storage));
 
    container.innerHTML = ''
    render()
-   remove(task, deadline);
+   clear(task, deadline);
    close(modalManager.addModal, modalManager.overlay__screen)();
    
 });
+
+modalManager.editModalSavebtn.addEventListener("click", () => {
+   // must change the data in localstorage
+   let editingId, parent, currentTask, currentDate;
+   editingId = modalManager.editModal.dataset.task
+   parent = document.querySelector(`.todo__${editingId}`)
+   currentTask = parent.querySelector("#todo__task") 
+   currentDate = parent.querySelector("#todo__date")
+
+   let [newTask, newDate] = [
+      modalManager.editModal.querySelector("textarea"),
+      modalManager.editModal.querySelector("input"),
+   ]
+
+   let [date] = processDate(newDate)
+
+   currentTask.textContent = newTask.value || currentTask.textContent
+   currentDate.textContent = date || currentDate.textContent
+
+   clear(newTask, newDate)
+   close(modalManager.editModal, modalManager.overlay__screen)()
+})
