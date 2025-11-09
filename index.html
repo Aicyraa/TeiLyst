@@ -21,7 +21,7 @@
                id="edit__modal__button__close"
             />
          </div>
-         <textarea rows="13" name="" id="edit__task"></textarea>
+         <textarea rows="13" name="" id="edit__task" maxlength="85"></textarea>
          <input type="datetime-local" id="edit__task_due" />
          <button id="edit__modal__submit">Save</button>
       </div>
@@ -38,44 +38,17 @@
                      id="add__modal__button__close"
                   />
                </div>
-               <textarea rows="13" id="add__modal__task"></textarea>
+               <textarea rows="13" id="add__modal__task" autocapitalize="on" maxlength="85"></textarea>
                <input type="datetime-local" id="add__modal__task__due" />
                <button id="add__modal__submit">Save</button>
             </div>
             <div id="main__header__txt">
                <span> To Do </span>
             </div>
-            <button id="main__header__button">
-               <img src=".\img\add.png" alt="add" />
-               <span> Task </span>
-            </button>
+            <img src="./img/add.png" id="main__header__button">
          </div>
          <!--  taks  -->
-         <div class="main__todo__container">
-            <div class="todo">
-               <div class="todo__info">
-                  <div class="todo__info__left">
-                     <input type="radio" id="todo__radio_1" value="1" />
-                     <span id="todo__task"> Something something </span>
-                  </div>
-                  <div class="todo__info__right">
-                     <div>
-                        <img
-                           src="img/edit_calendar_17dp_434343_FILL0_wght400_GRAD0_opsz20.svg"
-                           alt=""
-                           id="edit__modal"
-                        />
-                        <img
-                           src="img/delete_17dp_434343_FILL0_wght400_GRAD0_opsz20.svg"
-                           alt=""
-                           id="todo__delete"
-                        />
-                     </div>
-                     <span id="todo__date"> 1/2/25 </span>
-                  </div>
-               </div>
-            </div>
-         </div>
+         <div class="main__todo__container"></div>
       </main>
    </body>
    <script type="module" src="/script/script.js" defer></script>
