@@ -5,7 +5,7 @@ export default class Todo {
 
    constructor(background, name, category, description, due, status, checkList, tags, priority) {
       this._id = crypto.randomUUID();
-      this._background = 'linear-gradient(120deg, lightgreen, lightblue)'
+      this._background = background
       this._name = name
       this._category = category
       this._description = Helper.setDesc(description)
@@ -14,8 +14,10 @@ export default class Todo {
       this._checkList = Helper.setCheckList(checkList)
       this._tags = Helper.setTags(tags)
       this._priority = priority
+      this._project = Helper.setProject()
    }
 
+   get id() { return this._id }
    get name() { return this._name }
    get category() { return this._category }
    get description() { return this._description}

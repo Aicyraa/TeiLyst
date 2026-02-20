@@ -21,5 +21,10 @@ export default class Helper {
       return string.split(",").map(t => t.trim().replace(/\s/g, "-"))
    }
 
+   static setProject() {
+      const active = localStorage.getItem("teilist-active-project")
+      return active
+   }
+
 }
 
