@@ -1,4 +1,5 @@
 import Todo from "./todo/todo.js";
+import Project from "./project/project.js";
 import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
 import { FDue, FDueBefore, FDueAfter, FDueRange } from "./utilities/filter.js";
 import { STodo, SCategory, SDue } from "./utilities/sort.js";
@@ -12,27 +13,20 @@ const todos = [
    new Todo(null, "Learn JS", "Career", "Yea", "2026-03-10T10:00", "In-progress", "Add projects,Update about,Deploy", "Programming", "medium"),
 ];
 
-console.log("--- Todo with due Date object ---");
-console.log(todos[0].name, todos[0].due);
-console.log(todos[0].name, todos[0].dueFormatted);
+const projects = [
+   new Project(null, "Math", "All about math"),
+   new Project(1, "Code", "All about code"),
+   new Project(0, "House", "All about house"),
+   new Project(2, "House", "All about house"),
+]
 
-console.log("\n--- Utilities ---");
-console.log("Count:", countTodo(todos));
-console.log("Categories:", getAllCategory(todos));
-console.log("Tags:", getAllTags(todos));
+function switchProject(project) {
+   // temp only
+   localStorage.setItem("teilist-active-project")
+}
 
-console.log("\n--- Sort by due date ---");
-console.log("Name Asc:", STodo(todos).map(v => v.name) );
-console.log("Name Desc:", STodo(todos, false).map(v => v.name));
-console.log("Category Asc", SCategory(todos).map(v => v.category));
-console.log("Cateogory Desc:", SCategory(todos, false).map(v => v.category));
-console.log("Ascending:", SDue(todos));
-console.log("Descending:", SDue(todos, false));
+function renderTodo(todo) {
+   // temp only
+}
 
-console.log("\n--- Filter by due date ---");
-console.log("Due on Mar 10:", FDue(new Date(2026, 2, 10), todos));
-console.log("Due before Mar 1:", FDueBefore(new Date(2026, 2, 1), todos));
-console.log("Due after Mar 1:", FDueAfter(new Date(2026, 2, 1), todos));
-console.log("Due Feb 21 - Feb 28:", FDueRange(new Date(2026, 1, 21), new Date(2026, 1, 28), todos));
-
-
+console.log(projects);
