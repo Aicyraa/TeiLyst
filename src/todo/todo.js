@@ -27,4 +27,5 @@ export default class Todo {
    get checkList() { return this._checkList}
    get tags() { return this._tags}
    get priority() { return this._priority}
+   get project() { return this._project }
 }

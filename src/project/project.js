@@ -4,7 +4,7 @@ export default class Project {
    constructor(icon, name, description) {
       this._id = crypto.randomUUID()
       this._icon = Helper.setIcon(icon)
-      this._name = name
+      this._name = name.toLowerCase()
       this._description = description
    }
 
