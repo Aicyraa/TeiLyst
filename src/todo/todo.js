@@ -1,4 +1,4 @@
-import Helper from "./Todo.helper.js";
+import Helper from "./helper.js";
 
 export default class Todo {
    
