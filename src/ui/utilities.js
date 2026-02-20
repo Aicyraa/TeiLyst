@@ -1,5 +1,5 @@
 export function switchProject(project) {
-   localStorage.setItem("teilist-active-project", project.toLowerCase())
+   localStorage.setItem("teilyst-active-project", project.toLowerCase())
 }
 
 export function renderTodo(todo) {
