@@ -22,9 +22,10 @@ export default class Helper {
    }
 
    static setProject() {
-      const active = localStorage.getItem("teilist-active-project")
-      return active
+      return localStorage.getItem("teilist-active-project")
    }
+
+    
 
 }
 

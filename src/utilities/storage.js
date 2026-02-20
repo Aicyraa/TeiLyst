@@ -1,10 +1,14 @@
-export function getData() {
-   return JSON.parse(localStorage.getItem("teilyst-todo"))
+import Todo from "../todo/todo.js"
+import Project from "../project/project.js"
+
+export function getTodoData() {
+   const raw = JSON.parse(localStorage.getItem("teilyst-todo")) || []
+   return raw.map(Todo.fromJSON)
 }
 
-export function setData(todo) {
+export function setTodoData(todo) {
    try { 
-      const newData = [...getData(), todo]
+      const newData = [...getTodoData(), ...todo]
       localStorage.setItem("teilyst-todo", JSON.stringify(newData))
       return "sucess"
    } catch (err) {

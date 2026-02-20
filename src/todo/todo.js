@@ -28,4 +28,20 @@ export default class Todo {
    get tags() { return this._tags}
    get priority() { return this._priority}
    get project() { return this._project }
+
+   static fromJSON(obj) {
+      const todo = Object.create(Todo.prototype)
+      todo._id = obj._id
+      todo._background = obj._background
+      todo._name = obj._name
+      todo._category = obj._category
+      todo._description = obj._description
+      todo._due = Helper.setDue(obj._due)
+      todo._status = obj._status
+      todo._checkList = obj._checkList
+      todo._tags = obj._tags
+      todo._priority = obj._priority
+      todo._project = obj._project
+      return todo
+   }
 }
