@@ -1,6 +1,11 @@
 import Helper from "./helper.js"
 
 export default class Project {
+
+   static fromJSON(obj) {
+      return Object.assign(Object.create(Project.prototype), obj)
+   }
+
    constructor(icon, name, description) {
       this._id = crypto.randomUUID()
       this._icon = Helper.setIcon(icon)

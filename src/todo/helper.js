@@ -25,7 +25,5 @@ export default class Helper {
       return localStorage.getItem("teilist-active-project")
    }
 
-    
-
 }
 
