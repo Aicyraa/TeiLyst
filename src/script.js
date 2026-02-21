@@ -4,7 +4,7 @@ import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
 import { FDue, FDueBefore, FDueAfter, FDueRange } from "./utilities/filter.js";
 import { STodo, SCategory, SDue } from "./utilities/sort.js";
 import { switchProject, renderTodo } from "./ui/utilities.js";
-import { getData, getTodoData, setData, setTodoData } from "./utilities/storage.js";
+import { getTodoData, setTodoData, getProjectData, setProjectData } from "./utilities/storage.js";
 
 const todos = [
    new Todo(null, "Buy groceries", "Personal", "Pick up fruits, vegetables, and milk from the store", "2026-02-25T14:30", "pending", "Fruits,Vegetables,Milk", "shopping,errands", "high"),
@@ -16,11 +16,14 @@ const todos = [
 ];
 
 const projects = [
-   new Project(null, "Math", "All about math"),
-   new Project(1, "Code", "All about code"),
-   new Project(0, "House", "All about house"),
-   new Project(2, "Test", "All about house"),
+   new Project(null, "Math", "Yes 1"),
+   new Project(1, "Code", "Yes 2"),
+   new Project(0, "House", "Yes 3"),
+   new Project(2, "Test", "Yes 4"),
 ]
 
+// console.log(setTodoData(todos));
+// console.log(setProjectData(projects));
+
 console.log(getTodoData())
-console.log(STodo(getTodoData()));
+console.log(getProjectData());
