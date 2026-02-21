@@ -1,28 +1,61 @@
 <!doctype html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>TeiLyst</title>
-   </head>
-   <body>
-      <div class="container">
-         <div class="sidebar"></div>
-         <div class="main">
-            <div class="header">
-               <div class="group">
-                  <div class="view">
-                     <div class="icon"><img src="./icons/list.svg" alt="list"></div>
-                     <div class="icon"><img src="./icons/group.svg" alt="group"></div>
-                     <div class="icon"><img src="./icons/grid.svg" alt="grid"></div>
-                  </div>
-                  <div class="add">
-                     <img src="./icons/add.svg" alt="">
-                  </div>
-               </div>
-            </div>
-            <div class="todo-container"></div>
-         </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeiLyst</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+          <button class="expand-btn" id="expand-btn">
+            <img
+              src="./icons/sidebar_exp.svg"
+              alt="Expand/Collapse Sidebar"
+              class="expand-icon"
+              id="icon-expand"
+            />
+          </button>
+        </div>
+        <div class="divider">
+          <h5>PROJECTS</h5>
+          <button class="add-project-btn" id="add-project-btn">
+            <img src="./icons/folder_add.svg" alt="Add Project" />
+          </button>
+        </div>
+        <div class="projects" id="projects-list">
+          <div class="project-item">
+            <img src="./project/projectIcons/house.svg" alt="TALK TO US" />
+            <span class="project-name">TALK TO US</span>
+          </div>
+          <div class="project-item">
+            <img src="./project/projectIcons/code.svg" alt="CODE" />
+            <span class="project-name">CODE</span>
+          </div>
+          <div class="project-item">
+            <img src="./project/projectIcons/math.svg" alt="MATH" />
+            <span class="project-name">MATH</span>
+          </div>
+        </div>
       </div>
-   </body>
+      <div class="main">
+        <div class="header">
+          <div class="group">
+            <div class="view">
+              <div class="icon"><img src="./icons/list.svg" alt="list" /></div>
+              <div class="icon">
+                <img src="./icons/group.svg" alt="group" />
+              </div>
+              <div class="icon"><img src="./icons/grid.svg" alt="grid" /></div>
+            </div>
+            <div class="add">
+              <img src="./icons/add.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="todo-container"></div>
+      </div>
+    </div>
+  </body>
 </html>

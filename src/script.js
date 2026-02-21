@@ -1,4 +1,4 @@
-import "./style.css"
+import "./style.css";
 import Todo from "./todo/todo.js";
 import Project from "./project/project.js";
 import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
@@ -17,14 +17,37 @@ const todos = [
 ];
 
 const projects = [
-   new Project(null, "Math", "Yes 1"),
-   new Project(1, "Code", "Yes 2"),
-   new Project(0, "House", "Yes 3"),
-   new Project(2, "Test", "Yes 4"),
+  new Project(null, "Math", "Yes 1"),
+  new Project(1, "Code", "Yes 2"),
+  new Project(0, "House", "Yes 3"),
+  new Project(2, "Test", "Yes 4"),
 ]
 
 // console.log(setTodoData(todos));
 // console.log(setProjectData(projects));
 
-console.log(getTodoData())
+console.log(getTodoData());
 console.log(getProjectData());
+
+// Sidebar UI Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.getElementById("sidebar");
+  const expandBtn = document.getElementById("expand-btn");
+  const iconExpand = document.getElementById("icon-expand");
+  const projectItems = document.querySelectorAll(".project-item");
+
+  function toggleSidebar() {
+    sidebar.classList.toggle("open");
+    iconExpand.classList.toggle("open");
+  }
+
+  expandBtn.addEventListener("click", toggleSidebar);
+
+  projectItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      if (!sidebar.classList.contains("open")) {
+        toggleSidebar();
+      }
+    });
+  });
+});
