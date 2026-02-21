@@ -1,3 +1,4 @@
+import "./style.css"
 import Todo from "./todo/todo.js";
 import Project from "./project/project.js";
 import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
