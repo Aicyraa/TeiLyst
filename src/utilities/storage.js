@@ -15,3 +15,20 @@ export function setTodoData(todo) {
       return `error: ${err}`  
    }
 }
+
+// Project
+
+export function getProjectData() {
+   const raw = JSON.parse(localStorage.getItem("teilyst-project")) || []
+   return raw.map(Project.fromJSON)
+}
+
+export function setProjectData(project) {
+   try { 
+      const newData = [...getProjectData(), ...project]
+      localStorage.setItem("teilyst-project", JSON.stringify(newData))
+      return "sucess"
+   } catch (err) {
+      return `error: ${err}`  
+   }
+}
