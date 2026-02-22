@@ -4,10 +4,10 @@ import Project from "./project/project.js";
 import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
 import { FDue, FDueBefore, FDueAfter, FDueRange } from "./utilities/filter.js";
 import { STodo, SCategory, SDue } from "./utilities/sort.js";
-import { switchProject, renderTodo } from "./ui/todo.js";
 import { getTodoData, setTodoData, getProjectData, setProjectData } from "./utilities/storage.js";
 import { SBE } from "./ui/elements.js";
-import { toggleSidebar, projectListener, renderProject } from "./ui/sidebar.js";
+import { renderTodo } from "./ui/todo.js";
+import { toggleSidebar, projectListener, switchProject, renderProject } from "./ui/sidebar.js";
 
 const todos = [
   new Todo(null, "Buy groceries", "Personal", "Pick up fruits, vegetables, and milk from the store", "2026-02-25T14:30", "pending", "Fruits,Vegetables,Milk", "shopping,errands", "high",), 
@@ -28,10 +28,11 @@ const projects = [
   // Initialiter to prevent populated global variable
   console.log(getTodoData());
   console.log(getProjectData());
+
   renderProject(getProjectData())
   SBE().projectItems.forEach(p => p.addEventListener("click", projectListener))
   SBE().expandBtn.addEventListener("click", toggleSidebar);
-
+  SBE().projectContainer.addEventListener("click", switchProject)
 
 })()
 
