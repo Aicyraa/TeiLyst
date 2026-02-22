@@ -62,6 +62,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--sb-font-mono);
 }
 
 html,
@@ -153,14 +154,13 @@ body {
 
 .sidebar .divider h5 {
   color: var(--sb-fg-default);
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
+  font-size: 0.45rem !important;
+  letter-spacing: 0.25rem;
   font-weight: 500;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s;
-  /* Ensure it doesn't take up space and push layout when closed */
   width: 0; 
   overflow: hidden;
 }
@@ -245,7 +245,6 @@ body {
 .project-name {
   color: var(--sb-fg-default);
   font-weight: 500;
-  font-family: var(--sb-font-sans);
   font-size: 0.9rem;
   white-space: nowrap;
   opacity: 0;

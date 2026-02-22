@@ -6,16 +6,15 @@
     <title>TeiLyst</title>
   </head>
   <body>
+
+    <div class="todo-modal"></div>
+    <div class="project-modal"></div>
+
     <div class="container">
       <div class="sidebar" id="sidebar">
         <div class="sidebar-top">
           <button class="expand-btn" id="expand-btn">
-            <img
-              src="./icons/sidebar_exp.svg"
-              alt="Expand/Collapse Sidebar"
-              class="expand-icon"
-              id="icon-expand"
-            />
+            <img src="./icons/sidebar_exp.svg" alt="Expand/Collapse Sidebar" class="expand-icon" id="icon-expand" />
           </button>
         </div>
         <div class="divider">
@@ -24,20 +23,7 @@
             <img src="./icons/folder_add.svg" alt="Add Project" />
           </button>
         </div>
-        <div class="projects" id="projects-list">
-          <div class="project-item">
-            <img src="./project/projectIcons/house.svg" alt="TALK TO US" />
-            <span class="project-name">TALK TO US</span>
-          </div>
-          <div class="project-item">
-            <img src="./project/projectIcons/code.svg" alt="CODE" />
-            <span class="project-name">CODE</span>
-          </div>
-          <div class="project-item">
-            <img src="./project/projectIcons/math.svg" alt="MATH" />
-            <span class="project-name">MATH</span>
-          </div>
-        </div>
+        <div class="projects" id="projects-list"></div>
       </div>
       <div class="main">
         <div class="header">
