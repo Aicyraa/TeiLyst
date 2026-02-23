@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   /* ── Brand Core ── */
   --sb-brand-green: #3ecf8e;
@@ -62,7 +63,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--sb-font-mono);
+  font-family: "Montserrat", sans-serif, monospace, serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serifd;
 }
 
 html,
@@ -154,15 +155,15 @@ body {
 }
 
 .sidebar .divider h5 {
-  color: var(--sb-fg-default);
-  font-size: 0.45rem !important;
-  letter-spacing: 0.25rem;
-  font-weight: 500;
+  color: var(--sb-fg-subtle);
+  font-size: 0.4rem !important;
+  letter-spacing: 0.22rem;
+  font-weight: 700;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s;
-  width: 0; 
+  width: 0;
   overflow: hidden;
 }
 
@@ -217,8 +218,8 @@ body {
 .project-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 10px;
+  gap: 10px;
+  padding: 7px 10px;
   cursor: pointer;
   border-radius: var(--sb-radius-md);
   transition: background-color 0.2s ease;
@@ -231,8 +232,8 @@ body {
 }
 
 .project-item img {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   filter: brightness(0) invert(1);
   transition: filter 0.2s ease;
@@ -246,7 +247,7 @@ body {
 .project-name {
   color: var(--sb-fg-default);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
@@ -347,28 +348,28 @@ body {
 }
 
 .modal-header {
-  padding: 16px 20px 12px;
+  padding: 18px 22px 14px;
   border-bottom: 1px solid var(--sb-border-default);
 }
 
 .modal-header h3 {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sb-fg-default);
+  color: var(--sb-fg-subtle);
 }
 
 .modal-body {
-  padding: 16px 20px;
+  padding: 14px 22px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.2rem;
   overflow-y: auto;
 }
 
 .modal-footer {
-  padding: 12px 20px 16px;
+  padding: 12px 22px 16px;
   border-top: 1px solid var(--sb-border-default);
   display: flex;
   justify-content: flex-end;
@@ -384,10 +385,11 @@ body {
 }
 
 .group-input label {
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--sb-fg-muted);
+  font-size: 0.20rem;
+  letter-spacing: 0.35em;
+  color: var(--sb-fg-subtle);
+  font-weight: 500;
+  margin-bottom: 3px;
 }
 
 .modal-input {
@@ -396,8 +398,8 @@ body {
   border-radius: var(--sb-radius-md);
   color: var(--sb-fg-default);
   font-family: var(--sb-font-mono);
-  font-size: 0.78rem;
-  padding: 7px 10px;
+  font-size: 0.82rem;
+  padding: 7px 11px;
   outline: none;
   transition: border-color 0.15s ease;
   width: 100%;
@@ -409,7 +411,7 @@ body {
 
 .modal-textarea {
   resize: none;
-  height: 58px;
+  height: 48px;
 }
 
 .modal-select {
@@ -521,34 +523,81 @@ body {
 /* Input row */
 .input-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-.flex-1 { flex: 1; }
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+}
 
-/* Background swatches */
-.bg-swatches {
+/* Background picker */
+.bg-picker {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 2px 0;
+  gap: 10px;
+  height: 108px;
 }
 
-.bg-swatch {
-  width: 30px;
-  height: 30px;
+.bg-preview {
+  flex: 1;
+  border-radius: var(--sb-radius-lg);
+  border: 1px solid var(--sb-border-default);
+  background: linear-gradient(120deg, #1a1a2e, #16213e);
+  transition: background 0.2s ease;
+  min-width: 0;
+}
+
+.bg-list {
+  width: 116px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.bg-list::-webkit-scrollbar { display: none; }
+
+.bg-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px;
   border-radius: var(--sb-radius-md);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.12s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.bg-row:hover {
+  background-color: var(--sb-bg-surface);
+}
+
+.bg-row.selected {
+  background-color: var(--sb-bg-surface);
+  border-color: var(--sb-brand-green);
+}
+
+.bg-row-strip {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--sb-radius-sm);
   flex-shrink: 0;
 }
 
-.bg-swatch:hover { transform: scale(1.1); }
+.bg-row-label {
+  font-family: var(--sb-font-mono);
+  font-size: 0.62rem;
+  color: var(--sb-fg-muted);
+  white-space: nowrap;
+  transition: color 0.12s ease;
+}
 
-.bg-swatch.selected {
-  border-color: var(--sb-brand-green);
-  box-shadow: 0 0 0 1px var(--sb-brand-green);
+.bg-row.selected .bg-row-label,
+.bg-row:hover .bg-row-label {
+  color: var(--sb-fg-default);
 }
 
 /* Status pills */
@@ -560,7 +609,7 @@ body {
 
 .status-pill {
   font-family: var(--sb-font-mono);
-  font-size: 0.68rem;
+  font-size: 0.48rem;
   letter-spacing: 0.06em;
   padding: 5px 12px;
   border-radius: 20px;
