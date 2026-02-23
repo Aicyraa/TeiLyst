@@ -1,7 +1,5 @@
 import { SBE } from "./elements.js";
 
-
-
 export function toggleSidebar() {
    SBE().sidebar.classList.toggle("open");
    SBE().iconExpand.classList.toggle("open");
