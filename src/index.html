@@ -1,47 +1,150 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TeiLyst</title>
-  </head>
-  <body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>TeiLyst</title>
+   </head>
+   <body>
 
-    <div class="todo-modal"></div>
-    <div class="project-modal"></div>
+      <div class="overlay" id="overlay"></div>
 
-    <div class="container">
-      <div class="sidebar" id="sidebar">
-        <div class="sidebar-top">
-          <button class="expand-btn" id="expand-btn">
-            <img src="./icons/sidebar_exp.svg" alt="Expand/Collapse Sidebar" class="expand-icon" id="icon-expand" />
-          </button>
-        </div>
-        <div class="divider">
-          <h5>PROJECTS</h5>
-          <button class="add-project-btn" id="add-project-btn">
-            <img src="./icons/folder_add.svg" alt="Add Project" />
-          </button>
-        </div>
-        <div class="projects" id="projects-list"></div>
-      </div>
-      <div class="main">
-        <div class="header">
-          <div class="group">
-            <div class="view">
-              <div class="icon"><img src="./icons/list.svg" alt="list" /></div>
-              <div class="icon">
-                <img src="./icons/group.svg" alt="group" />
-              </div>
-              <div class="icon"><img src="./icons/grid.svg" alt="grid" /></div>
+      <!-- Project Modal -->
+      <div class="project-modal" id="project-modal">
+         <div class="modal-header">
+            <h3>New Project</h3>
+         </div>
+         <div class="modal-body">
+            <div class="group-input">
+               <label for="p-name">Name</label>
+               <input type="text" id="p-name" class="modal-input" placeholder="Project name..." />
             </div>
-            <div class="add">
-              <img src="./icons/add.svg" alt="" />
+            <div class="group-input">
+               <label>Icon</label>
+               <div class="icons-grid" id="project-icons-grid">
+                  <!-- Icons injected by JS -->
+               </div>
             </div>
-          </div>
-        </div>
-        <div class="todo-container"></div>
+         </div>
+         <div class="modal-footer">
+            <button class="btn-close" id="project-modal-close">Cancel</button>
+            <button class="btn-save" id="project-modal-save">Save</button>
+         </div>
       </div>
-    </div>
-  </body>
+
+      <!-- Todo Modal -->
+      <div class="todo-modal" id="todo-modal">
+         <div class="modal-header">
+            <h3>New Todo</h3>
+         </div>
+         <div class="modal-body todo-modal-body">
+
+            <!-- Background picker -->
+            <div class="group-input">
+               <label>Background</label>
+               <div class="bg-swatches" id="bg-swatches">
+                  <div class="bg-swatch selected" data-gradient="linear-gradient(120deg,#1a1a2e,#16213e)" style="background:linear-gradient(120deg,#1a1a2e,#16213e)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#0f3460,#533483)" style="background:linear-gradient(120deg,#0f3460,#533483)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#1b4332,#081c15)" style="background:linear-gradient(120deg,#1b4332,#081c15)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#3d0000,#1a0000)" style="background:linear-gradient(120deg,#3d0000,#1a0000)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#1a1a1a,#2d2d2d)" style="background:linear-gradient(120deg,#1a1a1a,#2d2d2d)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#2c1654,#1a0a2e)" style="background:linear-gradient(120deg,#2c1654,#1a0a2e)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#0d3b4f,#05141c)" style="background:linear-gradient(120deg,#0d3b4f,#05141c)"></div>
+                  <div class="bg-swatch" data-gradient="linear-gradient(120deg,#2d1b00,#1a0f00)" style="background:linear-gradient(120deg,#2d1b00,#1a0f00)"></div>
+               </div>
+            </div>
+
+            <!-- Row: Name + Category -->
+            <div class="input-row">
+               <div class="group-input flex-1">
+                  <label for="t-name">Name</label>
+                  <input type="text" id="t-name" class="modal-input" placeholder="Todo name..." />
+               </div>
+               <div class="group-input flex-1">
+                  <label for="t-category">Category</label>
+                  <input type="text" id="t-category" class="modal-input" placeholder="e.g. Work" />
+               </div>
+            </div>
+
+            <!-- Description -->
+            <div class="group-input">
+               <label for="t-desc">Description</label>
+               <textarea id="t-desc" class="modal-input modal-textarea" placeholder="Short description..."></textarea>
+            </div>
+
+            <!-- Row: Due + Priority -->
+            <div class="input-row">
+               <div class="group-input flex-1">
+                  <label for="t-due">Due Date</label>
+                  <input type="datetime-local" id="t-due" class="modal-input" />
+               </div>
+               <div class="group-input flex-1">
+                  <label for="t-priority">Priority</label>
+                  <select id="t-priority" class="modal-input modal-select">
+                     <option value="low">Low</option>
+                     <option value="medium" selected>Medium</option>
+                     <option value="high">High</option>
+                  </select>
+               </div>
+            </div>
+
+            <!-- Status -->
+            <div class="group-input">
+               <label>Status</label>
+               <div class="status-pills">
+                  <button class="status-pill selected" data-status="not-started">Not Started</button>
+                  <button class="status-pill" data-status="in-progress">In Progress</button>
+                  <button class="status-pill" data-status="complete">Complete</button>
+               </div>
+            </div>
+
+            <!-- Row: Tags + Checklist -->
+            <div class="input-row">
+               <div class="group-input flex-1">
+                  <label for="t-tags">Tags</label>
+                  <input type="text" id="t-tags" class="modal-input" placeholder="tag1,tag2..." />
+               </div>
+               <div class="group-input flex-1">
+                  <label for="t-checklist">Checklist</label>
+                  <input type="text" id="t-checklist" class="modal-input" placeholder="item1,item2..." />
+               </div>
+            </div>
+
+         </div>
+         <div class="modal-footer">
+            <button class="btn-close" id="todo-modal-close">Cancel</button>
+            <button class="btn-save" id="todo-modal-save">Save</button>
+         </div>
+      </div>
+
+      <div class="container">
+         <div class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+               <button class="expand-btn" id="expand-btn">
+                  <img src="./icons/sidebar_exp.svg" alt="Expand/Collapse Sidebar" class="expand-icon" id="icon-expand"/>
+               </button>
+            </div>
+            <div class="divider">
+               <h5>PROJECTS</h5>
+               <button class="add-project-btn" id="add-project-btn">
+                  <img src="./icons/folder_add.svg" alt="Add Project" />
+               </button>
+            </div>
+            <div class="projects" id="projects-list"></div>
+         </div>
+         <div class="main">
+            <div class="header">
+               <div class="group">
+                  <div class="view">
+                     <div class="icon"><img src="./icons/list.svg" alt="list"/></div>
+                     <div class="icon"><img src="./icons/group.svg" alt="group" /></div>
+                     <div class="icon"><img src="./icons/grid.svg" alt="grid" /></div>
+                  </div>
+                  <div class="add-todo-btn" id="add-todo-btn"><img src="./icons/add.svg" alt="" /></div>
+               </div>
+            </div>
+            <div class="todo-container"></div>
+         </div>
+      </div>
+   </body>
 </html>

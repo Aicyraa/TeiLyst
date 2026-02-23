@@ -8,6 +8,7 @@ import { getTodoData, setTodoData, getProjectData, setProjectData } from "./util
 import { SBE } from "./ui/elements.js";
 import { renderTodo } from "./ui/todo.js";
 import { toggleSidebar, projectListener, switchProject, renderProject } from "./ui/sidebar.js";
+import { initModals } from "./ui/modal.js";
 
 const todos = [
   new Todo(null, "Buy groceries", "Personal", "Pick up fruits, vegetables, and milk from the store", "2026-02-25T14:30", "pending", "Fruits,Vegetables,Milk", "shopping,errands", "high",), 
@@ -33,6 +34,7 @@ const projects = [
   SBE().projectItems.forEach(p => p.addEventListener("click", projectListener))
   SBE().expandBtn.addEventListener("click", toggleSidebar);
   SBE().projectContainer.addEventListener("click", switchProject)
+  initModals()
 
 })()
 
