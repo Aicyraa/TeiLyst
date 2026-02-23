@@ -5,10 +5,10 @@ import { countTodo, getAllCategory, getAllTags } from "./todo/utilities.js";
 import { FDue, FDueBefore, FDueAfter, FDueRange } from "./utilities/filter.js";
 import { STodo, SCategory, SDue } from "./utilities/sort.js";
 import { getTodoData, setTodoData, getProjectData, setProjectData } from "./utilities/storage.js";
-import { SBE } from "./ui/elements.js";
-import { renderTodo } from "./ui/todo.js";
+import { MEl, SBEl } from "./ui/elements.js";
+import { renderTodosDOM } from "./ui/todo.js";
 import { toggleSidebar, projectListener, switchProject, renderProject } from "./ui/sidebar.js";
-import { initModals } from "./ui/modal.js";
+import { openProjectModal, closeProjectModal, initTodoModalInteractions, openTodoModal, closeTodoModal } from "./ui/modal.js";
 
 const todos = [
   new Todo(null, "Buy groceries", "Personal", "Pick up fruits, vegetables, and milk from the store", "2026-02-25T14:30", "pending", "Fruits,Vegetables,Milk", "shopping,errands", "high",), 
@@ -26,15 +26,71 @@ const projects = [
 ];
 
 (() => {  
-  // Initialiter to prevent populated global variable
-  console.log(getTodoData());
-  console.log(getProjectData());
 
+  // Initialize
   renderProject(getProjectData())
-  SBE().projectItems.forEach(p => p.addEventListener("click", projectListener))
-  SBE().expandBtn.addEventListener("click", toggleSidebar);
-  SBE().projectContainer.addEventListener("click", switchProject)
-  initModals()
+  renderTodosDOM();
+  
+  const s = SBEl()
+  const m = MEl();
+  
+  initTodoModalInteractions();
+  s.expandBtn.addEventListener("click", toggleSidebar);
+  s.projectContainer.addEventListener("click", (e) => {
+     const delBtn = e.target.closest('.del-project-btn');
+     if (delBtn) {
+         const name = delBtn.dataset.name;
+         if (confirm(`Are you sure you want to delete project "${name}"?`)) {
+             const allProjects = getProjectData();
+             setProjectData(allProjects.filter(p => p.name !== name));
+             
+             const allTodos = getTodoData();
+             setTodoData(allTodos.filter(t => (t.project || '').toLowerCase() !== name.toLowerCase()));
+
+             const active = localStorage.getItem("teilyst-active-project");
+             if(active === name.toLowerCase()) {
+                 localStorage.setItem("teilyst-active-project", "all");
+             }
+             renderProject(getProjectData());
+             renderTodosDOM();
+         }
+         return;
+     }
+
+     switchProject(e);
+     renderTodosDOM();
+  });
+  s.projectItems.forEach(p => p.addEventListener("click", projectListener))
+
+  m.addProjectBtn.addEventListener("click", openProjectModal);
+  m.addTodoBtn.addEventListener("click", openTodoModal);
+  m.projectModalClose.addEventListener("click", closeProjectModal);
+  m.todoModalClose.addEventListener("click", closeTodoModal);
+  m.overlay.addEventListener("click", () => {
+     if (m.projectModal.classList.contains("active")) closeProjectModal();
+     if (m.todoModal.classList.contains("active")) closeTodoModal();
+  });
+
+  // View switchers
+  ["list", "group", "grid"].forEach(view => {
+      const btn = document.getElementById("view-" + view);
+      if (btn) {
+          btn.addEventListener("click", () => {
+             localStorage.setItem("teilyst-view", view);
+             renderTodosDOM();
+          });
+      }
+  });
+
+  // Sort logic
+  const sfSelect = document.getElementById("sort-filter-select");
+  if (sfSelect) {
+     sfSelect.addEventListener("change", (e) => {
+        localStorage.setItem("teilyst-sort", e.target.value);
+        renderTodosDOM();
+     });
+     sfSelect.value = localStorage.getItem("teilyst-sort") || "none";
+  }
 
 })()
 

@@ -16,6 +16,15 @@ export function setTodoData(todo) {
    }
 }
 
+export function replaceTodoData(todos) {
+   try { 
+      localStorage.setItem("teilyst-todo", JSON.stringify(todos))
+      return "sucess"
+   } catch (err) {
+      return `error: ${err}`  
+   }
+}
+
 // Project
 
 export function getProjectData() {
@@ -27,6 +36,15 @@ export function setProjectData(project) {
    try { 
       const newData = [...getProjectData(), ...project]
       localStorage.setItem("teilyst-project", JSON.stringify(newData))
+      return "sucess"
+   } catch (err) {
+      return `error: ${err}`  
+   }
+}
+
+export function replaceProjectData(projects) {
+   try { 
+      localStorage.setItem("teilyst-project", JSON.stringify(projects))
       return "sucess"
    } catch (err) {
       return `error: ${err}`  

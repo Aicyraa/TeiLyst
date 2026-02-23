@@ -23,6 +23,7 @@ export default class Todo {
    }
 
    get id() { return this._id }
+   get background() { return this._background }
    get name() { return this._name }
    get category() { return this._category }
    get description() { return this._description}

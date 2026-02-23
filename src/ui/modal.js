@@ -1,35 +1,66 @@
-import { ME, PROJECT_ICONS } from "./elements.js";
+import { FEl, MEl, PROJECT_ICONS } from "./elements.js";
+import Project from "../project/project.js";
+import Todo from "../todo/todo.js";
+import { setProjectData, setTodoData, getProjectData, getTodoData } from "../utilities/storage.js";
+import { renderProject } from "./sidebar.js";
+import { renderTodosDOM } from "./todo.js";
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// Helper
+const {
+   iconMap,
+   overlay,
+   projectModal,
+   todoModal,
+   addProjectBtn,
+   addTodoBtn,
+   projectModalClose,
+   projectModalSave,
+   todoModalClose,
+   todoModalSave,
+   projectIconsGrid,
+   statusPillsContainer,
+   statusPills,
+} = MEl();
+
+const { pName, bgPreview, bgSwatches, firstBgRow, tName, tCategory, tDesc, tTags, tChecklist, tDue, tPriority } = FEl();
 
 function openModal(modal) {
-   const { overlay } = ME();
    overlay.classList.add("active");
    modal.classList.add("active");
 }
 
 function closeModal(modal) {
-   const { overlay, projectModal, todoModal } = ME();
    modal.classList.remove("active");
-   // Only hide overlay when both modals are closed
    if (!projectModal.classList.contains("active") && !todoModal.classList.contains("active")) {
       overlay.classList.remove("active");
    }
 }
 
-// ── Project Modal ─────────────────────────────────────────────────────────────
+function clearTodoModal() {
+   [tName, tCategory, tDesc, tTags, tChecklist, tDue].forEach((el) => (el.value = ""));
+   tPriority.value = "medium";
+   document.querySelectorAll(".bg-row").forEach((r, i) => r.classList.toggle("selected", i === 0));
+   if (firstBgRow) syncBgPreview(firstBgRow.dataset.gradient);
+   document.querySelectorAll(".status-pill").forEach((p, i) => p.classList.toggle("selected", i === 0));
+}
 
-function buildProjectIcons() {
-   const { projectIconsGrid } = ME();
+function clearProjectModal() {
+   pName.value = "";
+}
+
+// Project Modal
+
+function renderIcons() {
    projectIconsGrid.innerHTML = "";
-
-   PROJECT_ICONS.forEach(({ key, src }, i) => {
+   iconMap.forEach(({ key, src }, i) => {
       const btn = document.createElement("button");
       btn.className = "icon-option" + (i === 0 ? " selected" : "");
       btn.dataset.iconKey = key;
       btn.innerHTML = `<img src="${src}" alt="${key}" />`;
       btn.addEventListener("click", () => {
-         projectIconsGrid.querySelectorAll(".icon-option").forEach(b => b.classList.remove("selected"));
+         projectIconsGrid
+            .querySelectorAll(".icon-option")
+            .forEach((b) => b.classList.remove("selected"));
          btn.classList.add("selected");
       });
       projectIconsGrid.appendChild(btn);
@@ -37,67 +68,93 @@ function buildProjectIcons() {
 }
 
 export function openProjectModal() {
-   buildProjectIcons();
-   openModal(ME().projectModal);
+   renderIcons();
+   openModal(projectModal);
 }
 
 export function closeProjectModal() {
-   closeModal(ME().projectModal);
-   document.querySelector("#p-name").value = "";
+   closeModal(projectModal);
+   clearProjectModal();
 }
 
-// ── Todo Modal ────────────────────────────────────────────────────────────────
+// Todo Modal
 
-function initTodoModalInteractions() {
-   // Background swatches
-   document.querySelector("#bg-swatches").addEventListener("click", (e) => {
-      const swatch = e.target.closest(".bg-swatch");
-      if (!swatch) return;
-      document.querySelectorAll(".bg-swatch").forEach(s => s.classList.remove("selected"));
-      swatch.classList.add("selected");
+function syncBgPreview(gradient) {
+   bgPreview.style.background = gradient;
+}
+
+export function initTodoModalInteractions() {
+   // Background rows — sync preview on click
+   bgSwatches.addEventListener("click", (e) => {
+      const row = e.target.closest(".bg-row");
+
+      if (!row) return;
+      document.querySelectorAll(".bg-row").forEach((r) => r.classList.remove("selected"));
+      row.classList.add("selected");
+      syncBgPreview(row.dataset.gradient);
    });
 
+   // Sync preview to the initially selected row
+   const firstRow = document.querySelector(".bg-row.selected");
+   if (firstRow) syncBgPreview(firstRow.dataset.gradient);
+
    // Status pills
-   document.querySelector(".status-pills").addEventListener("click", (e) => {
+   statusPillsContainer.addEventListener("click", (e) => {
       const pill = e.target.closest(".status-pill");
       if (!pill) return;
-      document.querySelectorAll(".status-pill").forEach(p => p.classList.remove("selected"));
+      statusPills.forEach((p) => p.classList.remove("selected"));
       pill.classList.add("selected");
    });
 }
 
 export function openTodoModal() {
-   openModal(ME().todoModal);
+   openModal(todoModal);
 }
 
 export function closeTodoModal() {
-   closeModal(ME().todoModal);
-   // Reset form fields
-   ["#t-name", "#t-category", "#t-desc", "#t-tags", "#t-checklist"].forEach(sel => {
-      document.querySelector(sel).value = "";
-   });
-   document.querySelector("#t-due").value = "";
-   document.querySelector("#t-priority").value = "medium";
-   document.querySelectorAll(".bg-swatch").forEach((s, i) => s.classList.toggle("selected", i === 0));
-   document.querySelectorAll(".status-pill").forEach((p, i) => p.classList.toggle("selected", i === 0));
+   closeModal(todoModal);
+   clearTodoModal();
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// Attach Save Listeners
+projectModalSave.addEventListener("click", () => {
+   const iconBtn = projectIconsGrid.querySelector(".icon-option.selected");
+   const iconKey = iconBtn ? iconBtn.dataset.iconKey : "folder_def.svg";
+   const name = pName.value.trim();
+   if (!name) return;
 
-export function initModals() {
-   const m = ME();
+   const newProject = new Project(iconKey, name, "");
+   setProjectData([newProject]);
+   
+   closeProjectModal();
+   // Trigger full render
+   const container = document.querySelector(".projects");
+   if (container) container.innerHTML = "";
+   renderProject(getProjectData());
+});
 
-   initTodoModalInteractions();
+todoModalSave.addEventListener("click", () => {
+   const name = tName.value.trim();
+   if (!name) return;
+   
+   const bgRow = document.querySelector(".bg-row.selected");
+   const background = bgRow ? bgRow.dataset.gradient : "";
+   const category = tCategory.value.trim();
+   const desc = tDesc.value.trim();
+   const due = tDue.value;
+   const statusPill = statusPillsContainer.querySelector(".status-pill.selected");
+   const status = statusPill ? statusPill.dataset.status : "not-started";
+   const tags = tTags.value.trim();
+   const checklist = tChecklist.value.trim();
+   const priority = tPriority.value; 
 
-   m.addProjectBtn.addEventListener("click", openProjectModal);
-   m.addTodoBtn.addEventListener("click", openTodoModal);
+   const newTodo = new Todo(background, name, category, desc, due, status, checklist, tags, priority);
+   
+   const activeProject = localStorage.getItem("teilyst-active-project") || "all";
+   newTodo._project = activeProject === "all" ? null : activeProject;
 
-   m.projectModalClose.addEventListener("click", closeProjectModal);
-   m.todoModalClose.addEventListener("click", closeTodoModal);
-
-   // Overlay click closes whichever modal is open
-   m.overlay.addEventListener("click", () => {
-      if (m.projectModal.classList.contains("active")) closeProjectModal();
-      if (m.todoModal.classList.contains("active")) closeTodoModal();
-   });
-}
+   setTodoData([newTodo]);
+   
+   closeTodoModal();
+   renderTodosDOM(); 
+});

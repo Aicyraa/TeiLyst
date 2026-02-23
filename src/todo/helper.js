@@ -4,7 +4,6 @@ export default class Helper {
 
    static setDesc(string) {
       if (string.length <= 0 ) { return "N/A" }
-      else if (string.length > 25) { return string.slice(0, 22) + "..." }
    }
 
    static setDue(date) {
@@ -22,7 +21,7 @@ export default class Helper {
    }
 
    static setProject() {
-      return localStorage.getItem("teilist-active-project")
+      return localStorage.getItem("teilyst-active-project")
    }
 
 }
