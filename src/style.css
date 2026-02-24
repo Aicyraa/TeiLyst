@@ -305,6 +305,9 @@ body {
   border-radius: 0.7rem;
   border-left: 1px solid var(--sb-bg-default);
   border-right: 1px solid var(--sb-bg-default);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .header {

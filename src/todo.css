@@ -1,8 +1,9 @@
-npm/* Todo Container Layouts */
+/* Todo Container Layouts */
 .todo-container {
   padding: 1.5rem;
   overflow-y: auto;
-  height: calc(100% - 60px); 
+  flex: 1;
+  min-height: 0;
   display: flex;
   gap: 1.5rem;
 }
@@ -269,7 +270,7 @@ npm/* Todo Container Layouts */
 }
 .grid-mode .todo-card {
   width: calc(33.333% - 1rem); /* 3 columns */
-  min-width: 320px;
+  min-width: 240px;
   height: 380px; /* Fixed height for grid masonry consistency */
 }
 .grid-mode .todo-checklist {
@@ -281,6 +282,7 @@ npm/* Todo Container Layouts */
   flex-direction: row;
   align-items: stretch;
   overflow-x: auto; /* Allow horizontal scroll if needed */
+  overflow-y: hidden; /* Prevent vertical scroll on container; columns scroll internally */
   padding-bottom: 1rem;
 }
 .todo-group-col {
@@ -293,6 +295,8 @@ npm/* Todo Container Layouts */
   flex-direction: column;
   gap: 1.2rem;
   border: 1px solid var(--sb-border-default);
+  overflow: hidden; /* Constrain to flex layout so group-items can scroll */
+  min-height: 0; /* Allow shrinking in flex context */
 }
 .todo-group-col h4 {
   color: var(--sb-fg-muted);
@@ -308,7 +312,8 @@ npm/* Todo Container Layouts */
   gap: 1.2rem;
   overflow-y: auto;
   padding-right: 0.5rem;
-  height: 100%;
+  flex: 1; /* Fill remaining column height */
+  min-height: 0; /* Required for overflow-y: auto to work in flex child */
 }
 .group-items::-webkit-scrollbar {
   width: 6px;
@@ -321,6 +326,7 @@ npm/* Todo Container Layouts */
   /* Dynamic height based on content, but restricted */
   max-height: 480px;
   flex-shrink: 0; /* Prevent shrinking in scroll container */
+  width: 100%; /* Fill column width */
 }
 
 /* Responsive adjustments */
