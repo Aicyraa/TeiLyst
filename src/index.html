@@ -256,6 +256,67 @@
                 <img src="./icons/grid.svg" alt="grid" />
               </div>
             </div>
+
+            <!-- ── Center: Sort + Filter ── -->
+            <div class="navbar-center">
+              <!-- Sort -->
+              <div class="nb-control">
+                <span class="nb-label">Sort</span>
+                <select class="nb-select" id="sort-filter-select">
+                  <option value="none">Default</option>
+                  <option value="name-asc">Name A→Z</option>
+                  <option value="name-desc">Name Z→A</option>
+                  <option value="due-asc">Due ↑ Earliest</option>
+                  <option value="due-desc">Due ↓ Latest</option>
+                </select>
+              </div>
+
+              <!-- Divider -->
+              <div class="nb-divider"></div>
+
+              <!-- Filter trigger -->
+              <div class="nb-control">
+                <button class="nb-filter-btn" id="nb-filter-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                  <span>Filter</span>
+                  <span class="nb-filter-badge" id="nb-filter-badge" style="display:none">0</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Filter panel (popover) -->
+            <div class="nb-filter-panel" id="nb-filter-panel">
+              <div class="nbfp-section">
+                <p class="nbfp-label">Category</p>
+                <div class="nbfp-chips" id="nbfp-categories"></div>
+              </div>
+              <div class="nbfp-section">
+                <p class="nbfp-label">Tags</p>
+                <div class="nbfp-chips" id="nbfp-tags"></div>
+              </div>
+              <div class="nbfp-section">
+                <p class="nbfp-label">Due Date</p>
+                <div class="nbfp-due-row">
+                  <select class="nb-select nbfp-due-mode" id="nbfp-due-mode">
+                    <option value="none">Any time</option>
+                    <option value="on">On date</option>
+                    <option value="before">Before date</option>
+                    <option value="after">After date</option>
+                    <option value="range">Date range</option>
+                  </select>
+                </div>
+                <div class="nbfp-due-inputs" id="nbfp-due-inputs" style="display:none">
+                  <input type="date" class="nb-date-input" id="nbfp-date-a" />
+                  <span class="nbfp-range-sep" id="nbfp-range-sep" style="display:none">→</span>
+                  <input type="date" class="nb-date-input" id="nbfp-date-b" style="display:none" />
+                </div>
+              </div>
+              <div class="nbfp-footer">
+                <button class="nbfp-clear-btn" id="nbfp-clear-btn">Clear all</button>
+                <button class="nbfp-apply-btn" id="nbfp-apply-btn">Apply</button>
+              </div>
+            </div>
+
             <div class="add-todo-btn" id="add-todo-btn">
               <img src="./icons/add.svg" alt="" />
             </div>
