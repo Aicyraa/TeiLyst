@@ -10,11 +10,11 @@ export default class Project {
       this._id = crypto.randomUUID()
       this._icon = Helper.setIcon(icon)
       this._name = name.toLowerCase()
-      this._description = description
+      this._description = description  
    }
 
    get id() { return this._id }
    get icon() { return this._icon }
-   get name() { return this._name }
+   get name() { return this._name[0].toUpperCase() + this._name.slice(1, this._name.length) }
    get description() { return this._description }
 }

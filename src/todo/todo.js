@@ -13,7 +13,7 @@ export default class Todo {
       this._background = background
       this._name = name
       this._category = category
-      this._description = Helper.setDesc(description)
+      this._description = description
       this._due = Helper.setDue(due)
       this._status = status
       this._checkList = Helper.setCheckList(checkList)
@@ -28,7 +28,7 @@ export default class Todo {
    get category() { return this._category }
    get description() { return this._description}
    get due() { return this._due}
-   get dueFormatted() { return format(this._due, "MMM dd, yyyy 'at' h:mm a") }
+   get dueFormatted() { return format(this._due, "h:mm a | MMM dd, yyyy  ") }
    get status() { return this._status}
    get checkList() { return this._checkList}
    get tags() { return this._tags}
