@@ -1,3 +1,4 @@
+import { getTodoData, getProjectData, setProjectData, setTodoData } from "../utilities/storage.js";
 import { SBEl, sharedIcons } from "./elements.js";
 
 const {iconMap, sidebar, iconExpand, projectContainer} = SBEl()
@@ -33,6 +34,30 @@ export function updateActiveProjectClass() {
       } else {
          item.classList.remove('active');
       }
+   });
+}
+
+export function initProjectContainer(onUpdate) {
+   projectContainer.addEventListener("click", (e) => {
+      const delBtn = e.target.closest('.del-project-btn');
+      if (delBtn) {
+         const name = delBtn.dataset.name;
+         if (confirm(`Are you sure you want to delete project "${name}"?`)) {
+            setProjectData(getProjectData().filter(p => p.name !== name));
+            setTodoData(getTodoData().filter(t => (t.project || '').toLowerCase() !== name.toLowerCase()));
+
+            const active = localStorage.getItem("teilyst-active-project");
+            if (active === name.toLowerCase()) {
+               localStorage.setItem("teilyst-active-project", "all");
+            }
+            renderProject(getProjectData());
+            onUpdate();
+         }
+         return;
+      }
+
+      switchProject(e);
+      onUpdate();
    });
 }
 

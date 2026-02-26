@@ -48,6 +48,24 @@ export function MEl() {
    }
 }
 
+export function NBEl() {
+   return {
+      sortSelect:   document.getElementById("sort-filter-select"),
+      filterBtn:    document.getElementById("nb-filter-btn"),
+      filterPanel:  document.getElementById("nb-filter-panel"),
+      filterBadge:  document.getElementById("nb-filter-badge"),
+      clearBtn:     document.getElementById("nbfp-clear-btn"),
+      applyBtn:     document.getElementById("nbfp-apply-btn"),
+      catChips:     document.getElementById("nbfp-categories"),
+      tagChips:     document.getElementById("nbfp-tags"),
+      dueModeEl:    document.getElementById("nbfp-due-mode"),
+      dueInputsEl:  document.getElementById("nbfp-due-inputs"),
+      dateAEl:      document.getElementById("nbfp-date-a"),
+      dateBEl:      document.getElementById("nbfp-date-b"),
+      rangeSepEl:   document.getElementById("nbfp-range-sep"),
+   }
+}
+
 export function FEl(){
    return {
       pName: document.querySelector("#p-name"),
