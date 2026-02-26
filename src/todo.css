@@ -6,6 +6,10 @@
   min-height: 0;
   display: flex;
   gap: 1.5rem;
+  scrollbar-width: none;
+}
+.todo-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* SHARED CARD STYLES */
