@@ -252,84 +252,109 @@
 }
 .list-mode .todo-card {
   flex-direction: row;
-  min-height: 100px;
+  align-items: stretch;
+  height: auto;
+  overflow: visible;
+  border-radius: var(--sb-radius-xl);
 }
 .list-mode .todo-banner {
-  width: 120px;
-  min-width: 120px;
+  width: 200px;
+  min-width: 200px;
   flex-shrink: 0;
-  padding: 0;
+  padding: 0.75rem;
   border-radius: var(--sb-radius-xl) 0 0 var(--sb-radius-xl);
   border-right: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 .list-mode .todo-banner .todo-banner-top {
-  display: none;
+  display: contents;
+}
+.list-mode .todo-banner .todo-banner-labels {
+  width: 100%;
+}
+.list-mode .todo-banner .todo-banner-labels .todo-category {
+  display: block;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.list-mode .todo-banner .todo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
 }
 .list-mode .todo-body {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto auto;
-  column-gap: 2rem;
-  row-gap: 0.5rem;
-  padding: 1.2rem 1.8rem;
-  align-items: start;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1.2rem 1.6rem;
+  height: auto;
 }
 .list-mode .todo-name-row {
-  grid-column: 1;
-  grid-row: 1;
-  display: contents; /* let name and badges each go into grid naturally */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 .list-mode .todo-name-row .todo-name {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  grid-column: 1;
-  grid-row: 1;
   margin: 0;
 }
 .list-mode .todo-name-row .todo-badges {
-  display: none; /* badges shown in meta column instead */
+  display: flex;
 }
 .list-mode .todo-meta {
-  grid-column: 2;
-  grid-row: 1 / 4;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.75rem;
+  margin-bottom: 0.6rem;
 }
-.list-mode .todo-meta .todo-due {
-  order: 3;
+.list-mode .todo-meta-status,
+.list-mode .todo-meta-priority {
+  display: none;
 }
 .list-mode .todo-desc {
-  grid-column: 1;
-  grid-row: 2;
   font-size: 0.88rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   color: var(--sb-fg-muted);
+  margin-bottom: 0.6rem;
 }
 .list-mode .todo-tags {
-  grid-column: 1;
-  grid-row: 3;
+  margin-bottom: 0.6rem;
 }
 .list-mode .todo-checklist-container {
-  grid-column: 1 / -1;
-  margin-top: 0;
+  margin-top: 0.4rem;
   padding-top: 0.6rem;
   border-top: 1px dashed var(--sb-border-default);
+  flex-grow: 0;
+  overflow: visible;
 }
 .list-mode .todo-checklist {
-  max-height: 80px;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  max-height: none;
+  overflow-y: visible;
   gap: 0.3rem;
 }
 .list-mode .todo-checklist li {
   font-size: 0.72rem;
   padding: 0.25rem 0.5rem;
+  width: auto;
+  flex-shrink: 0;
 }
 
 /* In grid mode, hide the duplicate meta badges (shown in name-row instead) */

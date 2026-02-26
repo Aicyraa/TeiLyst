@@ -135,14 +135,14 @@ export function renderTodosDOM() {
    const filteredTodos = renderTodo(getTodoData());
 
    if (activeView === "group") {
-      const statuses = ["not-started", "in-progress", "complete"];
+      const statuses = ["pending", "in-progress", "completed"];
       statuses.forEach(status => {
          const col = document.createElement("div");
          col.className = "todo-group-col";
          col.innerHTML = `<h4>${status.replace("-", " ").toUpperCase()}</h4><div class="group-items"></div>`;
-         
+
          const itemsContainer = col.querySelector(".group-items");
-         const items = filteredTodos.filter(t => t.status === status);
+         const items = filteredTodos.filter(t => t.status?.toLowerCase() === status);
          items.forEach(t => itemsContainer.appendChild(createTodoDOM(t, "group")));
          
          container.appendChild(col);
